@@ -1,9 +1,21 @@
 import axios from "axios";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const sanitizeApiUrl = (value) => {
+  const raw = String(value ?? "").trim();
+  if (!raw || raw.toLowerCase() === "undefined" || raw.toLowerCase() === "null") {
+    return "";
+  }
+  if (!raw.startsWith("http://") && !raw.startsWith("https://")) {
+    return "";
+  }
+  return raw.replace(/\/+$/, "");
+};
+
+const API_BASE = sanitizeApiUrl(process.env.NEXT_PUBLIC_API_URL);
+const REFRESH_URL = API_BASE ? `${API_BASE}/api/auth/refresh` : "/api/auth/refresh";
 
 export const api = axios.create({
-  baseURL: API_BASE,
+  baseURL: API_BASE || undefined,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
@@ -51,7 +63,7 @@ api.interceptors.response.use(
       if (!accessToken || !refreshToken) throw new Error("No tokens");
 
       const { data } = await axios.post(
-        `${API_BASE}/api/auth/refresh`,
+        REFRESH_URL,
         { accessToken, refreshToken },
         { withCredentials: true }
       );
