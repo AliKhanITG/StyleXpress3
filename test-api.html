@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Testing API Response</h1>
+    <button onclick="testLogin()">Test Login</button>
+    <button onclick="testMe()">Test /me Endpoint</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testLogin() {
+            const email = prompt("Enter email:");
+            const password = prompt("Enter password:");
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userEmail: email, userPassword: password })
+                });
+                
+                const data = await response.json();
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                console.log("Login response:", data);
+                
+                // Store token for testing /me
+                localStorage.setItem('testToken', data.accessToken);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        async function testMe() {
+            const token = localStorage.getItem('testToken');
+            if (!token) {
+                alert('Login first');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/me', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                
+                const data = await response.json();
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                console.log("/me response:", data);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
