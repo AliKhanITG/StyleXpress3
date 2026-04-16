@@ -9,7 +9,7 @@ import { TopBar } from "@/Components/Layout/TopBar";
 import { Button } from "@/Components/Ui/Button";
 import { api } from "@/Lib/Api";
 
-/* ── helpers ─────────────────────────────────────────────────────────────── */
+/* -- helpers -------------------------------------------------------------- */
 const extractList = (d) =>
   Array.isArray(d) ? d : Array.isArray(d?.items) ? d.items : [];
 
@@ -38,9 +38,9 @@ export default function RetailersPage() {
   const [saving, setSaving]     = useState(false);
   const [formErr, setFormErr]   = useState("");
 
-  /* ── bootstrap ────────────────────────────────────────────────────────── */
+  /* -- bootstrap --------------------------------------------------------- */
 
-  /* ── load list ────────────────────────────────────────────────────────── */
+  /* -- load list --------------------------------------------------------- */
   const load = useCallback(async (pg = 1, q = "") => {
     setLoading(true);
     try {
@@ -59,14 +59,14 @@ export default function RetailersPage() {
 
   useEffect(() => { load(1, ""); }, [load]);
 
-  /* ── search ───────────────────────────────────────────────────────────── */
+  /* -- search ------------------------------------------------------------ */
   const handleSearch = (e) => {
     const q = e.target.value;
     setSearch(q);
     load(1, q);
   };
 
-  /* ── form open/close ──────────────────────────────────────────────────── */
+  /* -- form open/close --------------------------------------------------- */
   const openNew = () => {
     setEditing(null);
     setForm(emptyForm());
@@ -90,7 +90,7 @@ export default function RetailersPage() {
 
   const setField = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  /* ── save ─────────────────────────────────────────────────────────────── */
+  /* -- save -------------------------------------------------------------- */
   const save = async () => {
     const name = form.retailerName.trim();
     if (!name) { setFormErr("Retailer Name is required."); return; }
@@ -113,7 +113,7 @@ export default function RetailersPage() {
     }
   };
 
-  /* ── delete ───────────────────────────────────────────────────────────── */
+  /* -- delete ------------------------------------------------------------ */
   const remove = async (item) => {
     if (!window.confirm(`Delete retailer "${item.retailerName}"?`)) return;
     try {
@@ -124,17 +124,17 @@ export default function RetailersPage() {
     }
   };
 
-  /* ── pagination ───────────────────────────────────────────────────────── */
+  /* -- pagination -------------------------------------------------------- */
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
-  /* ── render ───────────────────────────────────────────────────────────── */
+  /* -- render ------------------------------------------------------------ */
   return (
     <div className="min-h-screen bg-slate-50">
       <TopBar title="Retailers" subtitle="Manage retailer accounts" />
 
       <div className="p-6 space-y-4">
 
-        {/* ── Form Panel ──────────────────────────────────────────────────── */}
+        {/* -- Form Panel --------------------------------------------------- */}
         {formOpen && (
           <div className="rounded-xl border border-indigo-200 bg-white shadow-lg ring-1 ring-indigo-100">
             {/* header */}
@@ -195,7 +195,7 @@ export default function RetailersPage() {
           </div>
         )}
 
-        {/* ── List Card ───────────────────────────────────────────────────── */}
+        {/* -- List Card ---------------------------------------------------- */}
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
           {/* toolbar */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">

@@ -8,7 +8,7 @@ import { api } from "@/Lib/Api";
 import { TopBar } from "@/Components/Layout/TopBar";
 import { Button } from "@/Components/Ui/Button";
 
-/* ── Style tokens ─────────────────────────────────────────────────────────── */
+/* -- Style tokens ---------------------------------------------------------- */
 const fieldLabelClass = "block text-[12px] font-medium text-slate-500 mb-1";
 const inp =
   "w-full h-9 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 focus:border-indigo-400 disabled:opacity-50";
@@ -17,7 +17,7 @@ const sel =
 const ta =
   "w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 focus:border-indigo-400 resize-none";
 
-/* ── Field wrapper ────────────────────────────────────────────────────────── */
+/* -- Field wrapper --------------------------------------------------------- */
 function Field({ label: lbl, required, children, className = "" }) {
   return (
     <div className={className}>
@@ -29,7 +29,7 @@ function Field({ label: lbl, required, children, className = "" }) {
   );
 }
 
-/* ── Category Tree ────────────────────────────────────────────────────────── */
+/* -- Category Tree --------------------------------------------------------- */
 function CategoryTree({ categories, selectedId, onSelect }) {
   const [expanded, setExpanded] = useState(new Set());
 
@@ -134,7 +134,7 @@ function CategoryTree({ categories, selectedId, onSelect }) {
   );
 }
 
-/* ── Image upload card ────────────────────────────────────────────────────── */
+/* -- Image upload card ----------------------------------------------------- */
 function ImageUpload({ label: lbl, required, multiple = false, name, onChange, icon: IconComp, color = "indigo", existingImage = null }) {
   const ref = useRef(null);
   const [files, setFiles] = useState([]);
@@ -286,7 +286,7 @@ function ImageUpload({ label: lbl, required, multiple = false, name, onChange, i
   );
 }
 
-/* ── Page ─────────────────────────────────────────────────────────────────── */
+/* -- Page ------------------------------------------------------------------ */
 export default function EditProductPage({ params }) {
   const resolvedParams = use(params);
   const productId = parseInt(resolvedParams.id, 10);
@@ -318,7 +318,7 @@ export default function EditProductPage({ params }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
 
-  /* ── Load all reference data ───────────────────────────────────────────── */
+  /* -- Load all reference data -------------------------------------------- */
   useEffect(() => {
     let cancelled = false;
 
@@ -432,13 +432,13 @@ export default function EditProductPage({ params }) {
     return () => { cancelled = true; };
   }, []);
 
-  /* ── Category selection handler ────────────────────────────────────────── */
+  /* -- Category selection handler ----------------------------------------- */
   const handleCategorySelect = (id, name) => {
     setForm(f => ({ ...f, categoryID: String(id), subCategoryID: "" }));
     setSelectedCategoryName(name);
   };
 
-  /* ── Helpers ────────────────────────────────────────────────────────────── */
+  /* -- Helpers ------------------------------------------------------------- */
   const setField = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleImageChange = (name, file) =>
@@ -457,7 +457,7 @@ export default function EditProductPage({ params }) {
     }));
   };
 
-  /* ── Submit ─────────────────────────────────────────────────────────────── */
+  /* -- Submit -------------------------------------------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.styleNo.trim()) { setError("Style Number is required."); return; }
@@ -568,7 +568,7 @@ export default function EditProductPage({ params }) {
     }
   };
 
-  /* ── Render ─────────────────────────────────────────────────────────────── */
+  /* -- Render -------------------------------------------------------------- */
   return (
     <div className="min-h-full bg-white">
       <TopBar title="Edit Product" />
@@ -576,7 +576,7 @@ export default function EditProductPage({ params }) {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-12 gap-0 min-h-[calc(100vh-64px)]">
 
-          {/* ══ LEFT ══════════════════════════════════════════════════════════ */}
+          {/* == LEFT ========================================================== */}
           <div className="col-span-7 border-r border-slate-100 p-6 overflow-y-auto space-y-4">
 
             <div className="flex items-center gap-2 mb-4">
@@ -767,7 +767,7 @@ export default function EditProductPage({ params }) {
                 {saving ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin mr-1.5" />
-                    Saving…
+                    Saving...
                   </>
                 ) : "Update Product"}
               </Button>
@@ -777,7 +777,7 @@ export default function EditProductPage({ params }) {
             </div>
           </div>
 
-          {/* ══ RIGHT ═════════════════════════════════════════════════════════ */}
+          {/* == RIGHT ========================================================= */}
           <div className="col-span-5 bg-white p-6 overflow-y-auto space-y-4 border-l border-slate-100">
 
             <Field label="Category" required>

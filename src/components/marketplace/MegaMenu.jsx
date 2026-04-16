@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { api } from "@/Lib/Api";
 
-/* ─── Build full tree from flat API list ─────────────────────────────────────
+/* --- Build full tree from flat API list ------------------------------------
  * The flat endpoint returns all categories with parentCategoryID.
  * We build the tree client-side — 100% reliable regardless of backend issues.
  */
@@ -30,7 +30,7 @@ function buildTree(flat) {
   return roots;
 }
 
-/* ─── Recursive node renderer ────────────────────────────────────────────────
+/* --- Recursive node renderer -----------------------------------------------
  *
  * Tree structure by category:
  *
@@ -103,7 +103,7 @@ function CategoryNode({ node, depth }) {
   );
 }
 
-/* ─── Main component ─────────────────────────────────────────────────────── */
+/* --- Main component ------------------------------------------------------ */
 export default function MegaMenu() {
   const [roots, setRoots] = useState([]);           // Level-0 nav items
   const [activeId, setActiveId] = useState(null);
@@ -290,7 +290,7 @@ export default function MegaMenu() {
   );
 }
 
-/* ─── Mobile recursive accordion ─────────────────────────────────────────── */
+/* --- Mobile recursive accordion ------------------------------------------ */
 function MobileAccordion({ items, depth }) {
   const [openId, setOpenId] = useState(null);
 

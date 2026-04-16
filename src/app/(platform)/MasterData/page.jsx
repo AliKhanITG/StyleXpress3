@@ -138,7 +138,7 @@ function getLevelColor(level) {
   return LEVEL_COLORS[Math.min(level, LEVEL_COLORS.length - 1)];
 }
 
-// ─── Category Tree Explorer ──────────────────────────────────────────────────
+// --- Category Tree Explorer -------------------------------------------------
 function CategoryExplorer({ allItems, onReload }) {
   const [breadcrumb, setBreadcrumb] = useState([]);
   const [currentParentId, setCurrentParentId] = useState(null);
@@ -596,7 +596,7 @@ function CategoryExplorer({ allItems, onReload }) {
   );
 }
 
-// ─── Generic Tab Content ─────────────────────────────────────────────────────
+// --- Generic Tab Content ----------------------------------------------------
 function GenericTabContent({ tabId, config }) {
   const { user } = useAuthStore();
   const [items, setItems] = useState([]);
@@ -788,7 +788,7 @@ function GenericTabContent({ tabId, config }) {
   );
 }
 
-// ─── Main Page ───────────────────────────────────────────────────────────────
+// --- Main Page --------------------------------------------------------------
 export default function MasterDataPage() {
   const [activeTab, setActiveTab] = useState("categories");
   const [categoryItems, setCategoryItems] = useState([]);

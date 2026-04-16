@@ -471,7 +471,7 @@ export default function MarketplacePage() {
         </div>
 
         <div className="flex gap-6 mt-4 pb-12">
-          {/* ─── Sidebar Filters ─── */}
+          {/* --- Sidebar Filters --- */}
           {/* Desktop */}
           <aside className="hidden lg:block w-60 flex-shrink-0">
             <div className="sticky top-[72px]">
@@ -563,7 +563,7 @@ export default function MarketplacePage() {
             </div>
           )}
 
-          {/* ─── Product Grid ─── */}
+          {/* --- Product Grid --- */}
           <main className="flex-1 min-w-0">
             {loading ? (
               <div className="marketplace-grid grid grid-cols-2 gap-3 md:gap-4" style={{ '--grid-cols': gridCols }}>
