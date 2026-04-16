@@ -7,7 +7,7 @@ const sanitizeApiUrl = (value) => {
   if (!raw.startsWith("http://") && !raw.startsWith("https://")) {
     return "";
   }
-  return raw.replace(/\/+$/, "");
+  return raw.replace(/\/+$/, "").replace(/\/api$/i, "");
 };
 
 const apiUrl = sanitizeApiUrl(process.env.NEXT_PUBLIC_API_URL);

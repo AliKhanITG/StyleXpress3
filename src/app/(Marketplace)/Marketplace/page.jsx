@@ -8,12 +8,12 @@ import {
   LayoutGrid, Grid3X3, Rows3, List,
 } from "lucide-react";
 import { useAuthStore } from "@/store/AuthStore";
-import { api } from "@/Lib/Api";
+import { api } from "@/lib/Api";
 import MarketplaceNav from "@/components/marketplace/MarketplaceNav";
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* ===========================================================================
    Sidebar filter helpers
-   ═══════════════════════════════════════════════════════════════════════════ */
+   =========================================================================== */
 
 function buildCategoryTree(flat) {
   const map = {};
@@ -208,9 +208,9 @@ function CheckboxFilterList({ items, selectedIds, onToggle, nameKey }) {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* ===========================================================================
    Product Card
-   ═══════════════════════════════════════════════════════════════════════════ */
+   =========================================================================== */
 
 function ProductCard({ product, inCart, onToggleCart }) {
   const [imgError, setImgError] = useState(false);
@@ -293,9 +293,9 @@ function ProductCard({ product, inCart, onToggleCart }) {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* ===========================================================================
    Main Marketplace Page
-   ═══════════════════════════════════════════════════════════════════════════ */
+   =========================================================================== */
 
 export default function MarketplacePage() {
   const { isAuthenticated } = useAuthStore();

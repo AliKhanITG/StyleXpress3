@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { api } from "@/Lib/Api";
+import { api } from "@/lib/Api";
 
 /* --- Build full tree from flat API list ------------------------------------
  * The flat endpoint returns all categories with parentCategoryID.
@@ -133,7 +133,7 @@ export default function MegaMenu() {
 
   return (
     <>
-      {/* ══ Desktop Nav Triggers ══ */}
+      {/* == Desktop Nav Triggers == */}
       <nav className="hidden lg:flex items-stretch">
         {roots.map((cat) => (
           <div
@@ -164,8 +164,8 @@ export default function MegaMenu() {
         ))}
       </nav>
 
-      {/* ══ Desktop Mega Panel — rendered in <body> via portal so CSS transforms
-           on the header's centering wrapper don't break fixed positioning ══ */}
+      {/* == Desktop Mega Panel: rendered in <body> via portal so CSS transforms
+           on the header's centering wrapper don't break fixed positioning == */}
       {mounted && active && active.children.length > 0 && createPortal(
         <div
           style={{
@@ -260,7 +260,7 @@ export default function MegaMenu() {
         document.body
       )}
 
-      {/* ══ Mobile Accordion ══ */}
+      {/* == Mobile Accordion == */}
       <div className="lg:hidden space-y-0.5">
         {roots.map((cat) => {
           const isOpen = mobileExpanded === cat.id;
