@@ -5,10 +5,14 @@ const sanitizeApiUrl = (value) => {
   if (!raw || raw.toLowerCase() === "undefined" || raw.toLowerCase() === "null") {
     return "";
   }
-  if (!raw.startsWith("http://") && !raw.startsWith("https://")) {
+  const normalized = raw.replace(
+    /^https?:\/\/stylexpress3\.scmcloud\.online(?=\/|$)/i,
+    "https://stylexpress3api.scmcloud.online"
+  );
+  if (!normalized.startsWith("http://") && !normalized.startsWith("https://")) {
     return "";
   }
-  return raw.replace(/\/+$/, "").replace(/\/api$/i, "");
+  return normalized.replace(/\/+$/, "").replace(/\/api$/i, "");
 };
 
 const API_BASE = sanitizeApiUrl(process.env.NEXT_PUBLIC_API_URL);
